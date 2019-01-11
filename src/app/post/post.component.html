@@ -1,0 +1,8 @@
+<input (keyup.enter)="createTodo(title)" class="form-control" #title type="text">
+<br>
+<div *ngFor="let todo of todos">
+  <app-panel>
+    <ng-container class="heading">{{todo.id}}<button class="btn btn-sm pull-right btn-danger" (click)="deleteTodo(todo)">Delete Me</button></ng-container>
+    <ng-container class="body">{{todo.title}}</ng-container>
+  </app-panel>
+</div>

@@ -1,0 +1,70 @@
+<ul class="nav nav-pills">
+  <li class="active" [class.active]="viewMode == 'listCourses'">
+      <a (click)="viewMode='listCourses'">List Courses</a>
+  </li>
+  <li [class.active]="viewMode == 'rateCourses'">
+      <a (click)="viewMode='rateCourses'">Rate Courses</a>
+  </li>
+</ul>
+<br>
+<div [ngSwitch]="viewMode">
+    <div *ngSwitchCase = "'listCourses'">
+        <div *ngIf="languages.length>0;then showCourses else noCourses"></div>
+        <ng-template #showCourses>
+          <div class="row" #showCourses *ngFor="let language of languages">
+            <div class="col-md-2"></div>
+            <div class="col-md-2">
+              <li><h3>{{language}}</h3></li>
+            </div>
+          </div>
+          <br>
+        </ng-template>
+        <ng-template #noCourses>
+          <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-3">
+              <h3>No Courses Listed</h3>
+            </div>
+          </div>
+        </ng-template>
+    </div>
+    <div *ngSwitchCase="'rateCourses'">
+        <div *ngIf="languages.length>0;then showCourses else noCourses"></div>
+        <ng-template #showCourses>
+          <h2>Rate the Course if you liked it !!!</h2>
+          <div class="row" #showCourses *ngFor="let language of languages">
+            <div class="col-md-2"></div>
+            <div class="col-md-2">
+              <li><h3>{{language}}</h3></li>
+            </div>
+            <div class="col-md-1">
+              <h3>
+                <favourite [isFav]="data.isFav" (change)="OnChange($event)"></favourite>
+              </h3>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-md-2">
+        
+            </div>
+            <div class="col-md-2">
+              <app-panel>
+                        <ng-container class="heading">This is Title</ng-container>
+                        <ng-container class="body">This is Body..........</ng-container>
+              </app-panel>
+              <button class="btn btn-primary" (click)="btnClick()">click to Display Results</button>
+            </div>
+          </div>
+        </ng-template>
+        <ng-template #noCourses>
+          <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-3">
+              <h3>No Courses Listed</h3>
+            </div>
+          </div>
+        </ng-template>
+    </div>
+    <div *ngSwitchDefault>Others</div>
+</div>
